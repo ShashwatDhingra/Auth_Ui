@@ -23,13 +23,13 @@ class Utils {
     );
   }
 
-  static showToastMessage(BuildContext context, String message) {
+  static showToastMessage(BuildContext context, String message, bool isTop) {
     showFlushbar(
         context: context,
         flushbar: Flushbar(
             margin: EdgeInsets.all(8),
             duration: Duration(seconds: 3),
-            flushbarPosition: FlushbarPosition.BOTTOM,
+            flushbarPosition: isTop ? FlushbarPosition.TOP : FlushbarPosition.BOTTOM,
             titleSize: 12,
             titleColor: Colors.white,
             message: message,

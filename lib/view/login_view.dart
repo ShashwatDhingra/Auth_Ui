@@ -114,7 +114,7 @@ class _LoginViewState extends State<LoginView> {
                                     onTap: () {
                                       Fluttertoast.cancel();
                                       Utils.showToastMessage(context,
-                                          'No Worries! Contact our support team ');
+                                          'No Worries! Contact our support team ', false);
                                     },
                                     child: Text(
                                       'Forget your password?',
@@ -149,7 +149,7 @@ class _LoginViewState extends State<LoginView> {
                                         MyButton(onPressed: () {
                                       HapticFeedback.vibrate();
                                       if (formKey.currentState!.validate()) {
-                                        Map<String, String> data = {
+                                        dynamic data = {
                                           'username': usernameController.text
                                               .toString(),
                                           'password':

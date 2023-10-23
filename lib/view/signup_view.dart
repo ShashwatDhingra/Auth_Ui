@@ -175,7 +175,7 @@ class _SignupViewState extends State<SignupView> {
                                   GestureDetector(
                                       onTap: () {
                                         Utils.showToastMessage(
-                                            context, 'Not available yet');
+                                            context, 'Not available yet', false);
                                       },
                                       child: Image.asset(
                                           'assets/images/social_frame.png'))

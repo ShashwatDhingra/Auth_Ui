@@ -14,38 +14,44 @@ class AuthViewModel extends ChangeNotifier {
     notifyListeners();
   }
 
-  Future<void> loginUser(dynamic data, BuildContext context) async {
+  Future<bool> loginUser(dynamic data, BuildContext context) async {
     _setLoading(true);
     await Future.delayed(const Duration(seconds: 2));
 
-    _authRepo.loginUser(data).then((value) {
-
-      if(value['success'] == false){
-        Utils.showToastMessage(context, value['message']);
+    _authRepo.loginUser(data, context).then((value) {
+      if (value['success'] == false) {
+        Utils.showToastMessage(context, value['message'], false);
+        return false;
+      } else if (value['success'] == true) {
+        Navigator.pushNamedAndRemoveUntil(
+            context, RouteName.home, (route) => false,
+            arguments: 'Welcome Back');
+        return true;
       }
-      else if (value['success'] == true) {
-        Navigator.pushNamedAndRemoveUntil(context, RouteName.home, (route) => false,arguments: 'Welcome Back');
-      }
+      return false;
     }).onError((error, stackTrace) {
-      Utils.showToastMessage(context, error.toString());
+      Utils.showToastMessage(context, error.toString(), false);
+      return false;
     });
 
     _setLoading(false);
+    return false;
   }
 
   Future<void> registerUser(dynamic data, BuildContext context) async {
     _setLoading(true);
     await Future.delayed(const Duration(seconds: 2));
 
-    _authRepo.registerUser(data).then((value) {
-      if(value['success'] == false){
-        Utils.showToastMessage(context, value['message']);
-      }
-      else if (value['success'] == true) {
-        Navigator.pushNamedAndRemoveUntil(context, RouteName.home, (route) => false, arguments: 'Welcome');
+    _authRepo.registerUser(data, context).then((value) {
+      if (value['success'] == false) {
+        Utils.showToastMessage(context, value['message'], false);
+      } else if (value['success'] == true) {
+        Navigator.pushNamedAndRemoveUntil(
+            context, RouteName.home, (route) => false,
+            arguments: 'Welcome');
       }
     }).onError((error, stackTrace) {
-      Utils.showToastMessage(context, error.toString());
+      Utils.showToastMessage(context, error.toString(), false);
     });
 
     _setLoading(false);
