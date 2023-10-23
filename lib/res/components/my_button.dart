@@ -9,15 +9,16 @@ class MyButton extends StatelessWidget {
     return GestureDetector(
       onTap: onPressed,
       child: Container(
-        padding: EdgeInsets.symmetric(horizontal: 18, vertical: 6),
+        width: 56,
+        height: 34,
         decoration: BoxDecoration(
-            gradient: LinearGradient(
+            gradient: const LinearGradient(
               colors: [Color.fromRGBO(249, 119, 148, 1), Color.fromRGBO(98, 58, 162, 1)], begin: Alignment(-0.7, -1.7)),
             borderRadius: BorderRadius.circular(24)),
         child: Icon(
           Icons.arrow_forward,
           color: Colors.white,
-          size: 32,
+          size: 24,
         ),
       ),
     );
